@@ -18,7 +18,7 @@ The backend API was **designed and implemented from scratch** for this app and i
 
 ---
 
-## 🚀 Live Backend API
+## 🚀  🔴 Live Working Backend API 🔴
 
 - **Base URL:** [https://civictrack-backend-xtr2.onrender.com](https://civictrack-backend-xtr2.onrender.com)  
 - **Test Endpoint:** [View All Posts](https://civictrack-backend-xtr2.onrender.com/api/posts)
@@ -74,6 +74,42 @@ The backend API was **designed and implemented from scratch** for this app and i
 | DELETE  | `/api/posts/:id`          | Delete a user's post                 | Yes  |
 | PUT     | `/api/posts/like/:id`     | Like a post                          | Yes  |
 | POST    | `/api/posts/comment/:id`  | Comment on a post                    | Yes  |
+
+---
+
+## 🏗 Architecture & Technical Design
+
+### **1. Modularity**
+- 📂 **Clean Folder Structure**: `routes`, `controllers`, `models`, `middleware`.
+- 🔄 **Reusable Components**: Common validation, error handling, and authentication modules.
+- 🔍 **Low Coupling, High Cohesion**: Business logic isolated from routing and database operations.
+
+### **2. Database Design**
+- 🗄 **MongoDB + Mongoose**: Strong schema definitions with validation rules.
+- 🔗 **Relationships**: Posts reference their authors (`User` model).
+- ⚡ **Performance**: Indexed key fields for faster queries at scale.
+
+### **3. Scalability**
+- 🌐 **Stateless API**: JWT auth supports horizontal scaling.
+- ⚙ **Non-blocking I/O**: Async Node.js architecture handles high concurrency.
+- 📈 **Extensibility**: Easily add new features without breaking existing code.
+
+---
+## 💻 Code Quality
+
+- ✅ **Consistent Naming & Formatting** — Industry-standard JavaScript conventions.
+- 📖 **Readable Control Flow** — `async/await` with structured `try/catch`.
+- 📝 **JSDoc Documentation** — For functions, models, and middleware.
+- 🛠 **Edge Case Handling** — Input validation and descriptive error responses.
+
+---
+
+## 🛡 Security
+
+- 🔐 **JWT Authentication & Role-based Authorization**
+- 🛡 **Password Hashing** — `bcryptjs` for secure storage.
+- 🚫 **Injection Prevention** — Input sanitization to block attacks.
+- 🌍 **HTTPS-Ready** — Secure headers and TLS support.
 
 ---
 
