@@ -1,4 +1,4 @@
-[OSModuleIIpptx__2025_05_13_14_36_36.pptx](https://github.com/user-attachments/files/21558469/OSModuleIIpptx__2025_05_13_14_36_36.pptx)# 🚨 CivicTrack - Android App
+# 🚨 CivicTrack - Android App
 
 Empowering citizens to report and track civic issues like road damage, water leaks, garbage overflow, and more — right from their neighborhood. Built with ❤️ using **Jetpack Compose** and **Retrofit**.
 
