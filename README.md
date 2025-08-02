@@ -36,7 +36,10 @@ Users can flag irrelevant/spam reports. Admin reviews flagged entries.
 Users can report without registration or login as verified users.
 
 ## 📱 ScreenShots and Video Demo
+
 <img width="108" height="240" alt="Screenshot_20250802_151054" src="https://github.com/user-attachments/assets/7d68ae1a-6998-44d3-8faf-4d4d36f1a92a" />
+<img width="108" height="240" alt="Screenshot_20250802_151122" src="https://github.com/user-attachments/assets/73397939-d5ac-4842-89d9-7b52faae7c95" />
+<img width="108" height="240" alt="Screenshot_20250802_151133" src="https://github.com/user-attachments/assets/603b5a17-2ef9-45da-b992-6d4bbf528501" />
 
 ---
 
