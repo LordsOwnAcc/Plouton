@@ -9,31 +9,30 @@
 
 ## 📖 Overview
 
-**CivicTrack** empowers citizens to **report** and **track** civic issues like road damage, water leaks, and garbage overflow — right from their neighborhood.
+**CivicTrack** empowers citizens to report and track civic issues like road damage, water leaks, and garbage overflow — all within their local neighborhood.  
+The project features a **native Android app** built with Jetpack Compose and a **custom REST API** developed by a **team member during a hackathon**.
 
-This **full-stack project** consists of:
-- 📱 **Native Android App** (Frontend)
-- ☁️ **Custom REST API** (Backend)
+The backend API was **designed and implemented from scratch** for this app and is **fully functional** — handling all **data, logic, and authentication** for the platform.
 
-Developed during a **hackathon**, it delivers a **real-world solution** for community issue reporting and tracking.
-
----
-
-## 🚀 Live Demo
-
-- **Base API URL:** [https://civictrack-backend-xtr2.onrender.com](https://civictrack-backend-xtr2.onrender.com)
-- **Test Endpoint:** [View Posts](https://civictrack-backend-xtr2.onrender.com/api/posts)
+🔗 **Project Repository (Full Stack):** [CivicTrack — GitHub](https://github.com/its-AmitB/oddo-project/tree/main)
 
 ---
 
-## ✨ Features
+## 🚀 Live Backend API
 
-- ✅ **Report Local Issues** — title, description, photos, category, and location.
-- ✅ **GPS-Based Visibility** — see issues only within a 3–5 km radius.
-- ✅ **Multiple Categories** — Roads, Lighting, Water Supply, Public Safety, etc.
-- ✅ **Real-Time Status Tracking** — In Progress, Resolved updates.
-- ✅ **Map View & Filters** — view issues as pins with filters.
-- ✅ **Spam Control** — flag irrelevant reports for moderation.
+- **Base URL:** [https://civictrack-backend-xtr2.onrender.com](https://civictrack-backend-xtr2.onrender.com)  
+- **Test Endpoint:** [View All Posts](https://civictrack-backend-xtr2.onrender.com/api/posts)
+
+---
+
+## ✨ Key Features
+
+✅ **Report Local Issues** — Submit reports with title, description, photos, category, and location  
+✅ **GPS-Based Filtering** — View only issues within a 3–5 km radius  
+✅ **Multiple Categories** — Roads, Lighting, Water Supply, Public Safety, and more  
+✅ **Real-Time Status Tracking** — Get notified on status updates (In Progress, Resolved)  
+✅ **Map Integration** — View issues as pins on Google Maps with filtering  
+✅ **Moderation Tools** — Flag and review spam or irrelevant posts  
 
 ---
 
@@ -45,26 +44,24 @@ Developed during a **hackathon**, it delivers a **real-world solution** for comm
 
 ---
 
-## 🛠 Tech Stack
+## 🛠 Tech Stack & Architecture
 
 ### 📱 Frontend (Android App)
 - **Language:** Kotlin  
 - **UI:** Jetpack Compose  
 - **Networking:** Retrofit  
 - **Maps:** Google Maps SDK  
-- **Dependency Injection:** Hilt/Dagger  
 
-### ☁️ Backend (REST API)
+### ☁️ Backend (Custom REST API)
 - **Runtime:** Node.js  
 - **Framework:** Express.js  
-- **Database:** MongoDB + Mongoose  
-- **Authentication:** JWT (JSON Web Token)  
-- **File Uploads:** Multer  
+- **Database:** MongoDB with Mongoose  
+- **Authentication:** JSON Web Tokens (JWT)  
 - **Deployment:** Render.com  
 
 ---
 
-## 🔌 API Documentation
+## 🔌 Backend API — Main Endpoints
 
 | Method  | Endpoint                  | Description                         | Auth |
 |---------|---------------------------|--------------------------------------|------|
@@ -72,16 +69,16 @@ Developed during a **hackathon**, it delivers a **real-world solution** for comm
 | POST    | `/api/login`              | Login and receive JWT                | No   |
 | GET     | `/api/profile`            | Get logged-in user's profile         | Yes  |
 | GET     | `/api/posts`              | List all civic issue posts           | No   |
-| GET     | `/api/posts/:id`          | Get single post by ID                | No   |
+| GET     | `/api/posts/:id`          | Get a specific post by ID            | No   |
 | POST    | `/api/posts`              | Create a new post                    | Yes  |
-| DELETE  | `/api/posts/:id`          | Delete post owned by user            | Yes  |
+| DELETE  | `/api/posts/:id`          | Delete a user's post                 | Yes  |
 | PUT     | `/api/posts/like/:id`     | Like a post                          | Yes  |
-| POST    | `/api/posts/comment/:id`  | Add comment to a post                | Yes  |
+| POST    | `/api/posts/comment/:id`  | Comment on a post                    | Yes  |
 
 ---
 
 ## ⚙️ Local Setup
 
-### 1️⃣ Clone Repository
+### 1️⃣ Clone the Repository
 ```bash
 git clone https://github.com/its-AmitB/oddo-project.git
