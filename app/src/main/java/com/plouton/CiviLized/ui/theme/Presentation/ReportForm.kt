@@ -36,6 +36,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import kotlinx.coroutines.delay
 
@@ -47,7 +48,7 @@ data class Category(
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun RoadsScreen() {
+fun RoadsScreen(navController: NavController) {
     var description by remember { mutableStateOf("") }
 var selectedCategory by remember { mutableStateOf(Category("","","")) }
     val context = LocalContext.current
@@ -291,7 +292,11 @@ launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickV
                 if (description.isNotBlank() && selectedCategory != Category("","","")&&selectedImageUri.isNotEmpty()) {
 
                     Toast.makeText(context,"Report Submitted", Toast.LENGTH_SHORT).show()
-
+navController.navigate("HomePage"){
+    popUpTo("HomePage"){
+        inclusive = true
+    }
+}
                 }
             },
             modifier = Modifier
@@ -314,8 +319,3 @@ launcher.launch(PickVisualMediaRequest(mediaType = ActivityResultContracts.PickV
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun RoadsScreenPreview() {
-    RoadsScreen()
-}

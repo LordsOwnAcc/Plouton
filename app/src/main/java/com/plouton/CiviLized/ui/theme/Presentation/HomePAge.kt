@@ -27,7 +27,18 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.MapProperties
+import com.google.maps.android.compose.MapType
+import com.google.maps.android.compose.MapUiSettings
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.rememberCameraPositionState
+import com.google.maps.android.compose.rememberMarkerState
 
 data class Complaint(
     val id: String,
@@ -41,9 +52,154 @@ data class Complaint(
     val profileImageUrl: String
 )
 
+data class ComplaintLocation(
+    val id: String,
+    val title: String,
+    val category: String,
+    val status: String,
+    val description: String,
+    val location: LatLng,
+    val studentName: String,
+    val date: String
+)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(navController: NavController) {
+
+
+    val keshavnagarLocation = LatLng(18.5679, 73.9143)
+
+    // Sample complaint locations within 3km of Keshavnagar
+    val complaintLocations = remember {
+        listOf(
+            ComplaintLocation(
+                id = "1",
+                title = "Broken Street Light",
+                category = "Lightning",
+                status = "In Progress",
+                description = "Street light not working since 3 days",
+                location = LatLng(18.5695, 73.9158), // ~200m from center
+                studentName = "Ahmad Ali",
+                date = "2024-01-15"
+            ),
+            ComplaintLocation(
+                id = "2",
+                title = "Water Supply Issue",
+                category = "Water Supply",
+                status = "Pending",
+                description = "No water supply for 2 days",
+                location = LatLng(18.5662, 73.9128), // ~300m from center
+                studentName = "Fatima Khan",
+                date = "2024-01-14"
+            ),
+            ComplaintLocation(
+                id = "3",
+                title = "Road Pothole",
+                category = "Roads",
+                status = "Resolved",
+                description = "Large pothole causing traffic issues",
+                location = LatLng(18.5701, 73.9171), // ~400m from center
+                studentName = "Hassan Ahmed",
+                date = "2024-01-13"
+            ),
+            ComplaintLocation(
+                id = "4",
+                title = "Garbage Collection",
+                category = "Cleanliness",
+                status = "In Progress",
+                description = "Overflowing garbage bins",
+                location = LatLng(18.5645, 73.9115), // ~500m from center
+                studentName = "Ayesha Malik",
+                date = "2024-01-12"
+            ),
+            ComplaintLocation(
+                id = "5",
+                title = "Traffic Signal Issue",
+                category = "Public Safety",
+                status = "Pending",
+                description = "Traffic signal not working properly",
+                location = LatLng(18.5712, 73.9189), // ~700m from center
+                studentName = "Ali Hassan",
+                date = "2024-01-11"
+            ),
+            ComplaintLocation(
+                id = "6",
+                title = "Road Obstruction",
+                category = "Obstruction",
+                status = "In Progress",
+                description = "Construction materials blocking road",
+                location = LatLng(18.5634, 73.9098), // ~800m from center
+                studentName = "Sara Ahmed",
+                date = "2024-01-10"
+            ),
+            ComplaintLocation(
+                id = "7",
+                title = "Broken Manhole Cover",
+                category = "Public Safety",
+                status = "Resolved",
+                description = "Dangerous open manhole",
+                location = LatLng(18.5723, 73.9205), // ~1km from center
+                studentName = "Omar Khan",
+                date = "2024-01-09"
+            ),
+            ComplaintLocation(
+                id = "8",
+                title = "Street Light Flickering",
+                category = "Lightning",
+                status = "Pending",
+                description = "Multiple street lights flickering",
+                location = LatLng(18.5618, 73.9076), // ~1.2km from center
+                studentName = "Zara Ali",
+                date = "2024-01-08"
+            ),
+            ComplaintLocation(
+                id = "9",
+                title = "Water Leakage",
+                category = "Water Supply",
+                status = "In Progress",
+                description = "Major water pipe leakage",
+                location = LatLng(18.5741, 73.9234), // ~1.5km from center
+                studentName = "Ahmed Malik",
+                date = "2024-01-07"
+            ),
+            ComplaintLocation(
+                id = "10",
+                title = "Road Repair Needed",
+                category = "Roads",
+                status = "Pending",
+                description = "Road surface damaged",
+                location = LatLng(18.5598, 73.9045), // ~2km from center
+                studentName = "Fatima Hassan",
+                date = "2024-01-06"
+            ),
+            ComplaintLocation(
+                id = "11",
+                title = "Public Toilet Cleaning",
+                category = "Cleanliness",
+                status = "Resolved",
+                description = "Public toilet needs maintenance",
+                location = LatLng(18.5763, 73.9267), // ~2.2km from center
+                studentName = "Hassan Ali",
+                date = "2024-01-05"
+            ),
+            ComplaintLocation(
+                id = "12",
+                title = "Tree Branch Blocking",
+                category = "Obstruction",
+                status = "In Progress",
+                description = "Fallen tree branch blocking path",
+                location = LatLng(18.5576, 73.9012), // ~2.5km from center
+                studentName = "Aisha Khan",
+                date = "2024-01-04"
+            )
+        )
+    }
+
+    var selectedComplaint by remember { mutableStateOf<ComplaintLocation?>(null) }
+
+    val cameraPositionState = rememberCameraPositionState {
+        position = CameraPosition.fromLatLngZoom(keshavnagarLocation, 14f)
+    }
     var selectedTab by remember { mutableStateOf(1) }
     val sampleComplaints = listOf(
         Complaint(
@@ -145,26 +301,22 @@ fun HomeScreen() {
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = "Muhammad Imran",
+                        text = "Sumit Yadav",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Bold,
                         color = Color.White
                     )
 
                     Text(
-                        text = "Student ID: 12345",
+                        text = "sumity12019@gmail.com",
                         fontSize = 14.sp,
                         color = Color.White.copy(alpha = 0.9f)
                     )
 
-                    Text(
-                        text = "Private",
-                        fontSize = 12.sp,
-                        color = Color.White.copy(alpha = 0.8f)
-                    )
+
 
                     Text(
-                        text = "Degree Course",
+                        text = "Signed using google ",
                         fontSize = 12.sp,
                         color = Color.White.copy(alpha = 0.8f)
                     )
@@ -233,26 +385,47 @@ fun HomeScreen() {
                                 Column(
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
-                                    Icon(
-                                        imageVector = Icons.Default.Place,
-                                        contentDescription = "Map",
-                                        modifier = Modifier.size(64.dp),
-                                        tint = Color.Gray
-                                    )
-                                    Spacer(modifier = Modifier.height(16.dp))
-                                    Text(
-                                        text = "Map View",
-                                        fontSize = 18.sp,
-                                        color = Color.Gray
-                                    )
-                                    Text(
-                                        text = "Coming Soon",
-                                        fontSize = 14.sp,
-                                        color = Color.Gray
-                                    )
-                                }
-                            }
-                        }
+
+                                    GoogleMap(
+                                        modifier = Modifier.fillMaxSize(),
+                                        cameraPositionState = cameraPositionState,
+                                        properties = MapProperties(
+                                            isMyLocationEnabled = false,
+                                            mapType = MapType.NORMAL
+                                        ),
+                                        uiSettings = MapUiSettings(
+                                            zoomControlsEnabled = true,
+                                            myLocationButtonEnabled = true,
+                                            mapToolbarEnabled = true
+                                        )
+                                    ) {
+                                        // Add markers for each complaint
+                                        complaintLocations.forEach { complaint ->
+                                            val markerColor = when (complaint.category) {
+                                                "Roads" -> BitmapDescriptorFactory.HUE_BLUE
+                                                "Lightning" -> BitmapDescriptorFactory.HUE_YELLOW
+                                                "Water Supply" -> BitmapDescriptorFactory.HUE_CYAN
+                                                "Cleanliness" -> BitmapDescriptorFactory.HUE_GREEN
+                                                "Public Safety" -> BitmapDescriptorFactory.HUE_RED
+                                                "Obstruction" -> BitmapDescriptorFactory.HUE_ORANGE
+                                                else -> BitmapDescriptorFactory.HUE_MAGENTA
+                                            }
+
+                                            Marker(
+                                                state = rememberMarkerState(position = complaint.location),
+                                                title = complaint.title,
+                                                snippet = "${complaint.category} - ${complaint.status}",
+                                                icon = BitmapDescriptorFactory.defaultMarker(
+                                                    markerColor
+                                                ),
+                                                onClick = { marker ->
+                                                    selectedComplaint = complaint
+                                                    true
+                                                }
+                                            )
+                                        }}}}                                }
+
+
                         1 -> {
                             // Complaints List
                             LazyColumn(
@@ -272,10 +445,13 @@ fun HomeScreen() {
 
         // Floating Action Button
         FloatingActionButton(
-            onClick = { /* Navigate to add complaint */ },
+            onClick = {
+                navController.navigate("ReportPage")
+            },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(16.dp),
+                .padding(16.dp)
+                ,
             containerColor = Color(0xFFE91E63)
         ) {
             Icon(
@@ -286,6 +462,8 @@ fun HomeScreen() {
         }
     }
 }
+
+
 
 @Composable
 fun ComplaintCard(complaint: Complaint) {
@@ -419,8 +597,3 @@ fun ComplaintCard(complaint: Complaint) {
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
-}

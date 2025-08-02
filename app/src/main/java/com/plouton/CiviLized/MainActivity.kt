@@ -13,7 +13,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.plouton.CiviLized.ui.theme.CiviLizedTheme
+import com.plouton.CiviLized.ui.theme.Presentation.HomeScreen
 import com.plouton.CiviLized.ui.theme.Presentation.RoadsScreen
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +28,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             CiviLizedTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) {
-                    RoadsScreen()
+                    val navController = rememberNavController()
+
+                    NavHost(navController = navController, startDestination = "HomePage"){
+                        composable (route ="HomePage"){
+                            HomeScreen(navController)
+                        }
+                        composable (route ="ReportPage"){
+                            RoadsScreen(navController)
+                        }
+                    }
 
 
 

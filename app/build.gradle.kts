@@ -58,6 +58,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     //noinspection UseTomlInstead
     implementation("io.coil-kt:coil-compose:2.5.0")
-    implementation ("com.google.maps.android:maps-compose:6.7.0")
+    implementation("com.google.maps.android:maps-compose:2.11.4")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation ("androidx.navigation:navigation-compose:2.9.3")
 
 }
